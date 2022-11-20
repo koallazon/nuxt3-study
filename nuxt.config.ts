@@ -20,13 +20,5 @@ export default defineNuxtConfig({
         { name: 'description', content: 'My amazing site.' },
       ],
     },
-    pageTransition: {
-      name: 'fade',
-      mode: 'out-in', // default
-    },
-    layoutTransition: {
-      name: 'slide',
-      mode: 'out-in', // default
-    },
   },
 })

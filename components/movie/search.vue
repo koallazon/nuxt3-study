@@ -7,7 +7,6 @@ interface MovieItem {
   imdbID: string
 }
 const query = ref('')
-const runtimeConfig = useRuntimeConfig()
 const movies = ref<MovieItem[]>([])
 const search = async () => {
   try {
@@ -17,12 +16,6 @@ const search = async () => {
         query: query.value,
       },
     })
-    console.log(
-      '🚀 ~ file: search.vue ~ line 15 ~ search ~res',
-      data.value,
-      error,
-      pending
-    )
     movies.value = data.value?.Search ?? []
   } catch (err) {
     console.error(err)
