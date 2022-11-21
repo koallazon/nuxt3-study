@@ -7,8 +7,8 @@ const route = useRoute()
 
 // const { data, error } = await useFetch('https://httpbin/org/status/500', {
 const { data, error } = await useFetch('/api/movieInfo', {
-  method: 'get',
-  query: {
+  method: 'GET',
+  params: {
     id: route.params.id,
   },
   pick: ['Plot', 'Title', 'Error'],
@@ -26,6 +26,12 @@ if (data.value) {
 if (data.value.Error === 'Incurrect IMDb ID.') {
   showError({ statusCode: 404, statusMessage: 'Page Not Found' })
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    test.value = true
+  }, 3000)
+})
 </script>
 
 <template>
