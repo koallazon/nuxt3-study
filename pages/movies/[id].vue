@@ -2,6 +2,9 @@
 // definePageMeta({
 //   pageTransition: true,
 // })
+definePageMeta({
+  layout: 'custom',
+})
 const detail = ref<any>(null)
 const route = useRoute()
 
