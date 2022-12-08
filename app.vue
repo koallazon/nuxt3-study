@@ -1,6 +1,18 @@
 <script lang="ts" setup>
 const layouts = ['default', 'custom']
 const curLayout = ref('default')
+const route = useRoute()
+console.log(route.meta)
+useHead({
+  // script: [{ hid: 'awesome', src: 'https://awesome-lib.js', body: true }],
+  title: route.meta.title || '',
+})
+
+onMounted(() => {
+  $(function () {
+    console.log($('nav'))
+  })
+})
 </script>
 
 <template>

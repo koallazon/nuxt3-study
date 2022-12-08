@@ -14,10 +14,17 @@ export default defineNuxtConfig({
   app: {
     head: {
       charset: 'utf-8',
-      title: 'My app',
+      title: 'Nuxt3 starter',
       meta: [
         // <meta name="description" content="My amazing site">
-        { name: 'description', content: 'My amazing site.' },
+        { name: 'description', content: 'Nuxt3 starter by ltg' },
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, user-scalable=yes',
+        },
+      ],
+      script: [
+        { hid: 'jquery', src: 'https://code.jquery.com/jquery-3.6.1.js' },
       ],
     },
   },
