@@ -5,13 +5,30 @@ const route = useRoute()
 console.log(route.meta)
 useHead({
   // script: [{ hid: 'awesome', src: 'https://awesome-lib.js', body: true }],
-  title: route.meta.title || '',
+  // title: route.meta.title || '',
+  titleTemplate: (titleChunk) => {
+    console.log('🚀 ~ file: app.vue:14 ~ titleChunk', titleChunk)
+    return titleChunk ? `${titleChunk} - Site Title` : 'Site Title'
+  },
 })
 
+// route가 변경될 때마다 document.title을 변경해준다.
+// watch(
+//   route,
+//   () => {
+//     useHead({
+//       title: route.meta.title,
+//     })
+//   },
+//   {
+//     immediate: true,
+//   }
+// )
+
 onMounted(() => {
-  $(function () {
-    console.log($('nav'))
-  })
+  // $(function () {
+  //   console.log($('nav'))
+  // })
 })
 </script>
 

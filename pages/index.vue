@@ -2,6 +2,9 @@
 definePageMeta({
   title: 'Home Page',
 })
+useHead({
+  titleTemplate: '%s - Site Home index',
+})
 </script>
 
 <template>
