@@ -2,7 +2,7 @@
 const layouts = ['default', 'custom']
 const curLayout = ref('default')
 const route = useRoute()
-console.log(route.meta)
+
 useHead({
   // script: [{ hid: 'awesome', src: 'https://awesome-lib.js', body: true }],
   // title: route.meta.title || '',
@@ -30,6 +30,9 @@ onMounted(() => {
   //   console.log($('nav'))
   // })
 })
+const counter = useCounter()
+const name = useName()
+const { num, increment } = useNumber()
 </script>
 
 <template>
@@ -43,6 +46,13 @@ onMounted(() => {
       <NuxtLink to="https://blog.yookidz.site" no-rel>My blog</NuxtLink>
     </nav>
     <NuxtPage />
+    <div>{{ counter }}</div>
+    {{ name }}
+    <button type="button" @click="name = 'koalla'">이름 바꾸자</button>
+    <div>
+      num: {{ num }}
+      <button type="button" @click="increment">+</button>
+    </div>
     <div class="btn-area">
       <button
         v-for="(layout, i) in layouts"
