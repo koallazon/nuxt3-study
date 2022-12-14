@@ -11,6 +11,9 @@ const name = useName()
 const { num, increment } = useNumber()
 const useDoctor = useState('doctor', 'doctor')
 const useSameDoctor = useState('doctor', () => 'Same doctor')
+function triggerError() {
+  throw new Error('manually triggered error')
+}
 </script>
 
 <template>
@@ -38,6 +41,7 @@ const useSameDoctor = useState('doctor', () => 'Same doctor')
       {{ useDoctor }}
       {{ useSameDoctor }}
     </dd>
+    <button @click="triggerError">에러 유발</button>
   </dl>
 </template>
 

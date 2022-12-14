@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { showError } from '#app'
 const layouts = ['default', 'custom']
 const curLayout = ref('default')
 const route = useRoute()
@@ -46,6 +47,7 @@ const { num, increment } = useNumber()
       <NuxtLink to="https://blog.yookidz.site" no-rel>My blog</NuxtLink>
     </nav>
     <NuxtPage />
+    <button class="n-link-base" @click="showError">Trigger fatal error</button>
     <div>{{ counter }}</div>
     {{ name }}
     <button type="button" @click="name = 'koalla'">이름 바꾸자</button>
