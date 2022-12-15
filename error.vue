@@ -1,7 +1,8 @@
 <template>
   <div class="relative font-sans" n="green6">
     <div class="container max-w-200 mx-auto py-10 px-4">
-      <h1>{{ error.message }}</h1>
+      <h1>{{ error.statusCode }} - {{ error.message }}</h1>
+      <div>{{ error.stack }}</div>
       There was an error 😱
 
       <br />

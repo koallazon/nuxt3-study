@@ -6,6 +6,14 @@ interface MovieItem {
   Year: string
   imdbID: string
 }
+
+const hasIssue = ref(false)
+
+const fixIssue = (error: any) => {
+  hasIssue.value = false
+  error.value = null
+}
+
 const query = ref('')
 const movies = ref<MovieItem[]>([])
 const search = async () => {
@@ -16,8 +24,10 @@ const search = async () => {
         query: query.value,
       },
     })
+    throw new Error('에러지롱')
     movies.value = data.value?.Search ?? []
   } catch (err) {
+    hasIssue.value = true
     console.error(err)
   }
 }
@@ -28,13 +38,23 @@ const search = async () => {
     <input type="text" v-model="query" />
     <button>Search</button>
   </form>
-  <ul>
-    <li v-for="movie in movies" :key="movie.imdbID">
-      <NuxtLink :to="{ name: 'movies-id', params: { id: movie.imdbID } }">
-        <img :src="movie.Poster" :alt="movie.Title" />
-      </NuxtLink>
-    </li>
-  </ul>
+  <NuxtErrorBoundary>
+    <throw-error v-if="hasIssue" />
+    <div v-else>
+      <ul>
+        <li v-for="movie in movies" :key="movie.imdbID">
+          <NuxtLink :to="{ name: 'movies-id', params: { id: movie.imdbID } }">
+            <img :src="movie.Poster" :alt="movie.Title" />
+          </NuxtLink>
+        </li>
+      </ul>
+    </div>
+
+    <template #error="{ error }">
+      Component failed to Render -_-
+      <button @click="fixIssue(error)">(fix the issue)</button>
+    </template>
+  </NuxtErrorBoundary>
 </template>
 
 <style scoped>

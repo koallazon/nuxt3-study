@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { showError } from '#app'
+// import { showError } from '#app'
 const layouts = ['default', 'custom']
 const curLayout = ref('default')
 const route = useRoute()
@@ -8,7 +8,6 @@ useHead({
   // script: [{ hid: 'awesome', src: 'https://awesome-lib.js', body: true }],
   // title: route.meta.title || '',
   titleTemplate: (titleChunk) => {
-    console.log('🚀 ~ file: app.vue:14 ~ titleChunk', titleChunk)
     return titleChunk ? `${titleChunk} - Site Title` : 'Site Title'
   },
 })
@@ -25,12 +24,19 @@ useHead({
 //     immediate: true,
 //   }
 // )
-
-onMounted(() => {
-  // $(function () {
-  //   console.log($('nav'))
-  // })
+const { data, error, pending } = await useFetch('/api/movieSearch', {
+  method: 'get',
+  query: {
+    query: 1,
+  },
 })
+console.log('data', !!data.value, process.server, process.client)
+if (!!data.value) {
+  // throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+  // showError({ statusCode: 500, statusMessage: 'Page Not Found', stack: '2' })
+  // showError(new Error('에러지롱'))
+}
+
 const counter = useCounter()
 const name = useName()
 const { num, increment } = useNumber()
