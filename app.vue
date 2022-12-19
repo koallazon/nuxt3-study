@@ -45,7 +45,10 @@ const { num, increment } = useNumber()
 <template>
   <NuxtLayout>
     <!-- :name="curLayout" -->
-    <nav style="display: flex; gap: 10px">
+    <nav
+      class="flex h-[60px] mb-[25px] bg-gradient-to-r from-[#16c0b0] to-[#84c6fa]"
+      style="gap: 10px"
+    >
       <NuxtLink to="/">Home</NuxtLink>
       <RouterLink to="/movies/">Movies</RouterLink>
       <RouterLink to="/movies/mable">Mable Movies</RouterLink>
@@ -61,7 +64,7 @@ const { num, increment } = useNumber()
       num: {{ num }}
       <button type="button" @click="increment">+</button>
     </div>
-    <div class="btn-area">
+    <div class="flex p-[10px]">
       <button
         v-for="(layout, i) in layouts"
         class="button"
@@ -76,8 +79,6 @@ const { num, increment } = useNumber()
 
 <style>
 .btn-area {
-  display: flex;
-  padding: 10px;
   gap: 10px;
 }
 .button {

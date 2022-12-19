@@ -18,7 +18,7 @@ function triggerError() {
 
 <template>
   <div>Page: Home Page</div>
-  <dl>
+  <dl class="p-5">
     <dt>counter: {{ counter }}</dt>
     <dd>
       <button @click="counter++">+</button>
