@@ -19,4 +19,9 @@ h1 {
   font-size: 3rem;
   color: green;
 }
+div {
+  background-color: lightpink;
+  padding: 50px;
+  border-radius: 1.5rem;
+}
 </style>

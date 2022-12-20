@@ -2,6 +2,7 @@
 definePageMeta({
   title: 'Home Page',
 })
+
 useHead({
   titleTemplate: '%s - Site Home index',
 })
@@ -14,7 +15,9 @@ const useSameDoctor = useState('doctor', () => 'Same doctor')
 </script>
 
 <template>
+<section>
   <div>Page: Home Page</div>
+  <RouterLink to="about"><h2>about 페이지로 이동</h2></RouterLink>
   <dl>
     <dt>counter: {{ counter }}</dt>
     <dd>
@@ -39,6 +42,14 @@ const useSameDoctor = useState('doctor', () => 'Same doctor')
       {{ useSameDoctor }}
     </dd>
   </dl>
+  </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+section {
+  background-color: lightblue;
+  padding: 50px;
+  border-radius: 10px;
+  margin: 1.5rem auto;
+}
+</style>

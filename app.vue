@@ -89,13 +89,32 @@ a.router-link-exact-active {
   color: #00f;
   font-family: sans-serif;
 }
+/* Page transitions */
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.4s;
+  transition: all 1s;
 }
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
 }
+.rotate-enter-active,
+.rotate-leave-active {
+  transition: all 0.4s;
+}
+.rotate-enter-from,
+.rotate-leave-to {
+  opacity: 0;
+  transform: rotate3d(1, 1, 1)
+}
+.layout-enter-active,
+.layout-leave-active {
+  transition: all .4s;
+}
+.layout-enter-from,
+.layout-leave-to {
+  filter: grayscale(1);
+}
+
 </style>
