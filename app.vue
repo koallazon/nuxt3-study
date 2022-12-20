@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+// import { showError } from '#app'
 const layouts = ['default', 'custom']
 const curLayout = ref('default')
 const route = useRoute()
@@ -7,7 +8,6 @@ useHead({
   // script: [{ hid: 'awesome', src: 'https://awesome-lib.js', body: true }],
   // title: route.meta.title || '',
   titleTemplate: (titleChunk) => {
-    console.log('🚀 ~ file: app.vue:14 ~ titleChunk', titleChunk)
     return titleChunk ? `${titleChunk} - Site Title` : 'Site Title'
   },
 })
@@ -24,12 +24,19 @@ useHead({
 //     immediate: true,
 //   }
 // )
-
-onMounted(() => {
-  // $(function () {
-  //   console.log($('nav'))
-  // })
+const { data, error, pending } = await useFetch('/api/movieSearch', {
+  method: 'get',
+  query: {
+    query: 1,
+  },
 })
+console.log('data', !!data.value, process.server, process.client)
+if (!!data.value) {
+  // throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+  // showError({ statusCode: 500, statusMessage: 'Page Not Found', stack: '2' })
+  // showError(new Error('에러지롱'))
+}
+
 const counter = useCounter()
 const name = useName()
 const { num, increment } = useNumber()
@@ -38,7 +45,10 @@ const { num, increment } = useNumber()
 <template>
   <NuxtLayout>
     <!-- :name="curLayout" -->
-    <nav style="display: flex; gap: 10px">
+    <nav
+      class="flex h-[60px] mb-[25px] bg-gradient-to-r from-[#16c0b0] to-[#84c6fa]"
+      style="gap: 10px"
+    >
       <NuxtLink to="/">Home</NuxtLink>
       <RouterLink to="/movies/">Movies</RouterLink>
       <RouterLink to="/movies/mable">Mable Movies</RouterLink>
@@ -46,6 +56,7 @@ const { num, increment } = useNumber()
       <NuxtLink to="https://blog.yookidz.site" no-rel>My blog</NuxtLink>
     </nav>
     <NuxtPage />
+    <button class="n-link-base" @click="showError">Trigger fatal error</button>
     <div>{{ counter }}</div>
     {{ name }}
     <button type="button" @click="name = 'koalla'">이름 바꾸자</button>
@@ -53,7 +64,7 @@ const { num, increment } = useNumber()
       num: {{ num }}
       <button type="button" @click="increment">+</button>
     </div>
-    <div class="btn-area">
+    <div class="flex p-[10px]">
       <button
         v-for="(layout, i) in layouts"
         class="button"
@@ -68,8 +79,6 @@ const { num, increment } = useNumber()
 
 <style>
 .btn-area {
-  display: flex;
-  padding: 10px;
   gap: 10px;
 }
 .button {
