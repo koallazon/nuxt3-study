@@ -1,11 +1,31 @@
-export const useName = () => ref('ltg')
+import { reactive, computed } from '#imports'
 
-const number = ref<number>(0)
-export const useNumber = () => {
-  const increment = () => number.value++
+interface UserInfo {
+  name: string
+  department: string
+}
+
+interface State {
+  userInfo: UserInfo | null
+}
+
+// data
+const state = reactive<State>({
+  userInfo: null,
+})
+
+export function useAuth() {
+  // computed
+  const isLogged = computed(() => !!state.userInfo)
+
+  // methods
+  function setUserInfo(data: UserInfo): void {
+    state.userInfo = data
+  }
 
   return {
-    num: readonly(number),
-    increment,
+    userInfo: readonly(state.userInfo),
+    isLogged,
+    setUserInfo,
   }
 }

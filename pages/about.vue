@@ -1,16 +1,7 @@
-<script lang="ts" setup>
-definePageMeta({
-  title: 'about Page',
-  pageTransition: {
-    name: 'rotate'
-  }
-})
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div>
-    Page: about
-  </div>
+  <strong>Page: about:</strong>
 </template>
 
 <style scoped></style>

@@ -8,7 +8,6 @@ definePageMeta({
 const detail = ref<any>(null)
 const route = useRoute()
 
-// const { data, error } = await useFetch('https://httpbin/org/status/500', {
 const { data, error } = await useFetch('/api/movieInfo', {
   method: 'GET',
   params: {

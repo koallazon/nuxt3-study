@@ -1,14 +1,13 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import path from 'path'
+import dotenv from 'dotenv'
 
-const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '.env') })
+dotenv.config({ path: path.resolve(__dirname, '.env.local') })
 
 export default defineNuxtConfig({
   runtimeConfig: {
     apiKey: process.env.API_SECRET,
     public: {
       apiBaseUrl: process.env.API_BASE_URL || 'default_base_url',
-      apiSecret: process.env.API_SECRET,
     },
   },
   app: {
@@ -25,9 +24,7 @@ export default defineNuxtConfig({
           content: 'width=device-width, initial-scale=1, user-scalable=yes',
         },
       ],
-      script: [
-        { hid: 'jquery', src: 'https://code.jquery.com/jquery-3.6.1.js' },
-      ],
+      script: [{ hid: 'jquery', src: 'https://code.jquery.com/jquery-3.6.1.js' }],
     },
   },
   css: ['~/assets/css/main.css'],
@@ -36,5 +33,9 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
+  },
+  modules: ['@pinia/nuxt'],
+  pinia: {
+    autoImports: ['defineStore', ['defineStore', 'definePiniaStore']],
   },
 })
