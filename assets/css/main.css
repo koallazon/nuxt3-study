@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  button {
+    @apply rounded !bg-blue-500 hover:!bg-blue-600 text-white px-4 py-1 my-2;
+  }
+}
+
+@layer components {
+  .container {
+    @apply p-10 border border-slate-500 mx-auto;
+  }
+}

@@ -1,4 +1,4 @@
-export const useCountStore = defineStore('counter', () => {
+export const useCountStore = defineStore('setupCounter', () => {
   // state
   const count = ref<number>(0)
 

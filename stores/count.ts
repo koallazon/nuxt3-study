@@ -1,4 +1,4 @@
-export const useCountStore = defineStore('counter', {
+export const useCountStore = defineStore('optionCounter', {
   state: () => ({
     count: 0,
   }),
@@ -6,9 +6,8 @@ export const useCountStore = defineStore('counter', {
     doubleCount: (state) => state.count * 2,
   },
   actions: {
-    async increment(): Promise<number> {
+    increment() {
       this.count++
-      return this.count
     },
   },
 })

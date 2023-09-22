@@ -9,7 +9,7 @@ interface State {
   userInfo: UserInfo | null
 }
 
-export const useUserByOptionsStore = defineStore('userByOptions', {
+export const useUserStore = defineStore('optionUser', {
   state: (): State => ({
     userInfo: null,
   }),

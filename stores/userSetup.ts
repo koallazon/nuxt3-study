@@ -6,7 +6,7 @@ interface UserInfo {
   department: string
 }
 
-export const useUserBySetupStore = defineStore('UserBySetup', () => {
+export const useUserStore = defineStore('setupUser', () => {
   // state
   const userInfo = ref<UserInfo | null>(null)
 
@@ -19,7 +19,7 @@ export const useUserBySetupStore = defineStore('UserBySetup', () => {
   }
 
   return {
-    userInfo: readonly(userInfo),
+    userInfo,
     isLogged,
     setUserInfo,
   }

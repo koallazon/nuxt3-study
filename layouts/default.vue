@@ -1,17 +1,37 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
 import { useAuth } from '@/composables/states'
-// import { useUserByOptionsStore } from '~/stores/userByOptions'
-// import { useUserBySetupStore } from '~/stores/userBySetup'
+import { useUserStore as useOptionUserStore } from '~/stores/user'
+import { useUserStore as useSetupUserStore } from '~/stores/userSetup'
 
 // composable
-const { userInfo, isLogged } = useAuth()
-console.log('🚀 ~ file: default.vue:9 ~ userInfo, isLogged:', userInfo, isLogged)
+const { userInfo, isLogged, setUserInfo } = useAuth()
 
 // Options Store
-// const { userInfo: userInfoFromOptions, isLogged: isLoggedFromOptions } = useUserByOptionsStore()
+const optionUserStore = useOptionUserStore()
+const { userInfo: optionUserInfo, isLogged: optionIsLogged } = storeToRefs(optionUserStore)
 
 // Setup Store
-// const { userInfo: userInfoFromSetup, isLogged: isLoggedFromSetup } = useUserBySetupStore()
+const setupUserStore = useSetupUserStore()
+const { userInfo: setupUserInfo, isLogged: setupIsLogged } = storeToRefs(setupUserStore)
+
+const change = (type: 'composition' | 'optionStore' | 'setupStore') => {
+  const data = {
+    name: '홍길동',
+    department: '대표부서',
+  }
+  switch (type) {
+    case 'composition':
+      setUserInfo(data)
+      break
+    case 'optionStore':
+      optionUserStore.setUserInfo(data)
+      break
+    case 'setupStore':
+      setupUserStore.setUserInfo(data)
+      break
+  }
+}
 </script>
 
 <template>
@@ -21,6 +41,7 @@ console.log('🚀 ~ file: default.vue:9 ~ userInfo, isLogged:', userInfo, isLogg
         <li>
           <NuxtLink to="/">Home</NuxtLink>
         </li>
+        <li><RouterLink to="/count">Count</RouterLink></li>
         <li><RouterLink to="/movies/">Movies</RouterLink></li>
         <li><RouterLink to="/movies/mable">Mable Movies</RouterLink></li>
         <li><RouterLink to="/about" replace prefetch>About</RouterLink></li>
@@ -37,15 +58,34 @@ console.log('🚀 ~ file: default.vue:9 ~ userInfo, isLogged:', userInfo, isLogg
             <li>이름 : {{ userInfo.name }}</li>
             <li>부서 : {{ userInfo.department }}</li>
           </ul>
+          <button type="button" @click="change('composition')">변경</button>
         </div>
       </section>
       <section class="py-3">
         <h2 class="mb-3">Pinia Option</h2>
-        <p class="w-full h-[60px] border p-5 bg-slate-300"></p>
+        <p class="w-full h-[60px] border p-5 bg-slate-300">
+          로그인 {{ optionIsLogged ? 'On' : 'Off' }}
+        </p>
+        <div v-if="optionUserInfo !== null" class="w-full border p-5 bg-slate-300">
+          <ul>
+            <li>이름 : {{ optionUserInfo.name }}</li>
+            <li>부서 : {{ optionUserInfo.department }}</li>
+          </ul>
+          <button type="button" @click="change('optionStore')">변경</button>
+        </div>
       </section>
       <section class="py-3">
         <h2 class="mb-3">Pinia Setup</h2>
-        <p class="w-full h-[60px] border p-5 bg-slate-300"></p>
+        <p class="w-full h-[60px] border p-5 bg-slate-300">
+          로그인 {{ setupIsLogged ? 'On' : 'Off' }}
+        </p>
+        <div v-if="setupUserInfo !== null" class="w-full border p-5 bg-slate-300">
+          <ul>
+            <li>이름 : {{ setupUserInfo.name }}</li>
+            <li>부서 : {{ setupUserInfo.department }}</li>
+            <button type="button" @click="change('setupStore')">변경</button>
+          </ul>
+        </div>
       </section>
     </div>
     <slot />

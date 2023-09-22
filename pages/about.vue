@@ -1,21 +1,12 @@
 <script lang="ts" setup>
-import { useCountStore } from '~/stores/count'
-
-const countStore = useCountStore()
-
-function increment() {
-  countStore.increment().then((res: number) => {
-    console.log(res) // 1
-  })
-}
+const nuxtApp = useNuxtApp()
+const state = useState('counter', () => 0)
 </script>
 
 <template>
-  <strong>Page: about:</strong>
-  <section class="p-5">
-    <div>{{ countStore.count }}</div>
-    <button type="button" @click="increment">증감</button>
-  </section>
+  <div class="container">
+    <strong>Page: about:</strong>
+  </div>
 </template>
 
 <style scoped></style>
