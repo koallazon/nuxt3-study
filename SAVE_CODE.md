@@ -10,3 +10,7 @@ function encodeUnicode(str: string) {
     )
 }
 ```
+
+```
+http://localhost:3000/?token=eyJuYW1lIjogIuydtO2DnOq3nCIsICJkZXBhcnRtZW50IjogIuyYqOudvOyduOqwnOuwnO2MgCJ9
+```

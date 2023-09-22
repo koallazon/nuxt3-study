@@ -10,12 +10,13 @@ interface State {
 }
 
 // data
-const state = reactive<State>({
+export const state = reactive<State>({
   userInfo: null,
 })
 
-export function useAuth() {
+export const useAuth = () => {
   // computed
+  const userInfo = computed(() => state.userInfo)
   const isLogged = computed(() => !!state.userInfo)
 
   // methods
@@ -24,7 +25,7 @@ export function useAuth() {
   }
 
   return {
-    userInfo: readonly(state.userInfo),
+    userInfo,
     isLogged,
     setUserInfo,
   }

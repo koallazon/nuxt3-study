@@ -1,21 +1,17 @@
 <script lang="ts" setup>
-import { useAuth } from '#imports'
-import { useUserByOptionsStore } from '~/stores/userByOptions'
-import { useUserBySetupStore } from '~/stores/userBySetup'
+import { useAuth } from '@/composables/states'
+// import { useUserByOptionsStore } from '~/stores/userByOptions'
+// import { useUserBySetupStore } from '~/stores/userBySetup'
 
 // composable
 const { userInfo, isLogged } = useAuth()
 console.log('🚀 ~ file: default.vue:9 ~ userInfo, isLogged:', userInfo, isLogged)
 
-onMounted(() => {
-  console.log('🚀 ~ file: default.vue:9 ~ mounted', userInfo, isLogged)
-})
-
 // Options Store
-const { userInfo: userInfoFromOptions, isLogged: isLoggedFromOptions } = useUserByOptionsStore()
+// const { userInfo: userInfoFromOptions, isLogged: isLoggedFromOptions } = useUserByOptionsStore()
 
 // Setup Store
-const { userInfo: userInfoFromSetup, isLogged: isLoggedFromSetup } = useUserBySetupStore()
+// const { userInfo: userInfoFromSetup, isLogged: isLoggedFromSetup } = useUserBySetupStore()
 </script>
 
 <template>
@@ -28,13 +24,12 @@ const { userInfo: userInfoFromSetup, isLogged: isLoggedFromSetup } = useUserBySe
         <li><RouterLink to="/movies/">Movies</RouterLink></li>
         <li><RouterLink to="/movies/mable">Mable Movies</RouterLink></li>
         <li><RouterLink to="/about" replace prefetch>About</RouterLink></li>
-        <li><NuxtLink to="https://blog.yookidz.site" no-rel>My blog</NuxtLink></li>
       </ul>
     </nav>
   </header>
   <main>
     <div class="p-10">
-      <section class="mb-10">
+      <section class="py-3">
         <h2 class="mb-3">Composables 전역 상태</h2>
         <p class="w-full border p-5 bg-slate-300">로그인 {{ isLogged ? 'On' : 'Off' }}</p>
         <div v-if="userInfo !== null" class="w-full border p-5 bg-slate-300">
@@ -44,13 +39,13 @@ const { userInfo: userInfoFromSetup, isLogged: isLoggedFromSetup } = useUserBySe
           </ul>
         </div>
       </section>
-      <section>
+      <section class="py-3">
         <h2 class="mb-3">Pinia Option</h2>
-        <p class="w-full h-10 border p-5 bg-slate-300"></p>
+        <p class="w-full h-[60px] border p-5 bg-slate-300"></p>
       </section>
-      <section>
-        <h2 class="mb-3">Pinia Option</h2>
-        <p class="w-full h-10 border p-5 bg-slate-300"></p>
+      <section class="py-3">
+        <h2 class="mb-3">Pinia Setup</h2>
+        <p class="w-full h-[60px] border p-5 bg-slate-300"></p>
       </section>
     </div>
     <slot />
